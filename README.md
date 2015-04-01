@@ -1,6 +1,6 @@
-# docker-flight24-feeder
+# docker-flightradar24-feeder
 
-Feed the data from https://registry.hub.docker.com/u/marcelmaatkamp/docker-gnuradio-dump1090 to http://www.flightradar24.com and get a premium subscription
+Feed the ADS/B data from a $10 RTLSDR dongle to http://flightradar24.com for a premium subscription
 
 To sign up for the frst time and aquire a flightradar24 key use:
 ```

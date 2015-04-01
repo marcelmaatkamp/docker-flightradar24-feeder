@@ -9,5 +9,10 @@ To sign up for the frst time and aquire a flightradar24 key use:
 
 After that start the feeder: 
 ```
- $ docker run --privileged -p 8754:8754 marcelmaatkamp/flightradar24-feeder --fr24key=<key>
+ $ docker run -d \
+   --name flightradar_feeder \
+   --restart=always \
+   --privileged \
+   -p 8754:8754 \
+   marcelmaatkamp/flightradar24-feeder --fr24key=<flightradar24 signup key>
 ```

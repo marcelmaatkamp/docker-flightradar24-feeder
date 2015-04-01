@@ -14,6 +14,7 @@ After that start the feeder with the key:
    --restart=always \
    --privileged \
    -p 8754:8754 \
+   -p 8080:8080 \
    marcelmaatkamp/flightradar24-feeder --fr24key=<flightradar24 signup key>
 ```
 

@@ -13,8 +13,10 @@ After that start the feeder with the key:
    --name flightradar_feeder \
    --restart=always \
    --privileged \
-   -p 8754:8754 \
    -p 8080:8080 \
+   -p 8754:8754 \
+   -p 30003:30003 \
+   -p 30334:30334 \
    marcelmaatkamp/flightradar24-feeder --fr24key=<flightradar24 signup key>
 ```
 See a plot of your locally received airplanes on:

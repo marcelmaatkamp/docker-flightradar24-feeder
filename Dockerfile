@@ -17,21 +17,20 @@ FROM marcelmaatkamp/docker-gnuradio-dump1090
 #    marcelmaatkamp/flightradar24-feeder \
 #      --fr24key=<flightradar24 signup key>
 
-RUN apt-get update
-RUN apt-get install -y wget 
+RUN \
+ add-apt-repository ppa:ubuntu-toolchain-r/test &&\
+ apt-get update &&\
+ apt-get install -y wget gcc-4.9 g++-4.9 &&\
+ rm -rf /var/lib/apt/lists/*
 
-RUN wget http://feed.flightradar24.com/linux/fr24feed_1.0.13-2_amd64.tgz
-RUN tar zxf fr24feed_1.0.13-2_amd64.tgz
+ENV FLIGHTRADAR_VERSION 1.0.18-5
+RUN \
+ wget http://feed.flightradar24.com/linux/fr24feed_${FLIGHTRADAR_VERSION}_amd64.tgz &&\
+ tar zxf fr24feed_${FLIGHTRADAR_VERSION}_amd64.tgz &&\
+ export LD_LIBRARY_PATH=/usr/local/lib64/:$LD_LIBRARY_PATH
 
 ADD fr24feed.ini /etc/fr24feed.ini
-
 WORKDIR fr24feed_amd64
 
-EXPOSE 8080
-EXPOSE 8754
-EXPOSE 30001
-EXPOSE 30002
-EXPOSE 30003
-EXPOSE 30334
-
+EXPOSE 8080 8754 30001 30002 30003 30334
 ENTRYPOINT ["./fr24feed"]

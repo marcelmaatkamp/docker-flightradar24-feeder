@@ -30,10 +30,15 @@ $ sudo echo -e "\nblacklist dvb_usb_rtl28xxu\nblacklist rtl2832\nblacklist rtl28
 # sign up 
 To sign up for the first time and acquire a flightradar24 key:
 ```
-$ docker run -ti marcelmaatkamp/flightradar24-feeder --signup
+$ bin/signup.sh
 ```
 
 After that start the feeder with the key: 
+```
+$ bin/start.sh
+```
+
+Or start the docker container manually:
 ```
  $ docker run -d \
    --name flightradar_feeder \

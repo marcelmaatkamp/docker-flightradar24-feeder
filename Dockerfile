@@ -18,9 +18,9 @@ FROM marcelmaatkamp/docker-gnuradio-dump1090
 #      --fr24key=<flightradar24 signup key>
 
 RUN \
- add-apt-repository ppa:ubuntu-toolchain-r/test &&\
- apt-get update &&\
- apt-get install -y wget gcc-4.9 g++-4.9 &&\
+ apt-get install -y \
+  wget \
+  build-essential &&\
  rm -rf /var/lib/apt/lists/*
 
 ENV FLIGHTRADAR_VERSION 1.0.34-0
@@ -33,4 +33,10 @@ ADD fr24feed.ini /etc/fr24feed.ini
 WORKDIR fr24feed_amd64
 
 EXPOSE 8080 8754 30001 30002 30003 30334
+
+RUN \
+ ln -s \
+  /gnuradio/dump1090/dump1090 \
+  /usr/local/bin/dump1090
+
 ENTRYPOINT ["./fr24feed"]

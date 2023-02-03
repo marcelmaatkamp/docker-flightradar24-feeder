@@ -2,9 +2,35 @@
 
 Feed the ADS/B data from a $10 RTLSDR dongle to http://flightradar24.com for a premium subscription
 
+# driver blacklist
+The host machine (which runs docker) might claim the dongle for its original purpose (to watch live tv). You can test this by running `dump1090` in the container and if it can't claim the dongle (`Device or resource busy`) blacklist the modules:
+
+## test
+```
+$ bin/test_dump1090.sh
+
+Hex     Mode  Sqwk  Flight   Alt    Spd  Hdg    Lat      Long   Sig  Msgs   Ti|
+-------------------------------------------------------------------------------
+0: Realtek, RTL2838UHIDIR, SN: 00000001 (currently selected)
+
+Kernel driver is active, or device is claimed by second instance of librtlsdr.
+In the first case, please either detach or blacklist the kernel module
+(dvb_usb_rtl28xxu), or enable automatic detaching at compile time.
+
+usb_claim_interface error -6
+Error opening the RTLSDR device: Device or resource busy
+```
+
+## blacklist
+Blacklist `dvb_usb_rtl28xxu` and `rtl2832` and reboot docker host machine:
+```
+$ sudo echo -e "\nblacklist dvb_usb_rtl28xxu\nblacklist rtl2832\nblacklist rtl2830" >> /etc/modprobe.d/blacklist.conf
+```
+
+# sign up 
 To sign up for the first time and acquire a flightradar24 key:
 ```
- $ docker run -ti marcelmaatkamp/flightradar24-feeder --signup
+$ docker run -ti marcelmaatkamp/flightradar24-feeder --signup
 ```
 
 After that start the feeder with the key: 

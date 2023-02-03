@@ -33,4 +33,10 @@ ADD fr24feed.ini /etc/fr24feed.ini
 WORKDIR fr24feed_amd64
 
 EXPOSE 8080 8754 30001 30002 30003 30334
+
+RUN \
+ ln -s \
+  /gnuradio/dump1090/dump1090 \
+  /usr/local/bin/dump1090
+
 ENTRYPOINT ["./fr24feed"]

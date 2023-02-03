@@ -5,10 +5,15 @@ Feed the ADS/B data from a $10 RTLSDR dongle to http://flightradar24.com for a p
 # sign up 
 To sign up for the first time and acquire a flightradar24 key:
 ```
-$ docker run -ti marcelmaatkamp/flightradar24-feeder --signup
+$ bin/signup.sh
 ```
 
 After that start the feeder with the key: 
+```
+$ bin/start.sh
+```
+
+Or start the docker container manually:
 ```
  $ docker run -d \
    --name flightradar_feeder \
